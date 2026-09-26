@@ -13,6 +13,7 @@ class SpeechProcessingMode(StrEnum):
 @dataclass(slots=True)
 class AssistantSettings:
     wake_word_enabled: bool = True
+    wake_phrase: str = "ассистент"
     speech_processing_mode: SpeechProcessingMode = SpeechProcessingMode.LOCAL
 
     @classmethod
@@ -24,6 +25,7 @@ class AssistantSettings:
             speech_processing_mode = SpeechProcessingMode.LOCAL
         return cls(
             wake_word_enabled=bool(value.get("wake_word_enabled", True)),
+            wake_phrase=str(value.get("wake_phrase", "ассистент")).strip() or "ассистент",
             speech_processing_mode=speech_processing_mode,
         )
 
